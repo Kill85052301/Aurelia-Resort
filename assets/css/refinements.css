@@ -1,0 +1,208 @@
+/* Ajustes compartilhados de leitura e alinhamento. Mantém a composição editorial. */
+:root {
+  --site-width: 1440px;
+  --layout-gap: clamp(1.25rem, 2.5vw, 2.5rem);
+  --panel-space: clamp(1.4rem, 2.5vw, 2.5rem);
+  --section-space: clamp(3rem, 5vw, 5rem);
+}
+/* Cabeçalho e conteúdo usam a mesma largura e as mesmas margens externas. */
+main, .site-header { max-width: var(--site-width); padding-inline: var(--gutter); }
+.site-header {
+  grid-template-columns: minmax(270px, 310px) minmax(0, 1fr);
+  gap: 1.25rem var(--layout-gap);
+  padding-block: 1.85rem;
+  align-items: center;
+}
+.brand-name { gap: 1rem; font-size: 1.35rem; letter-spacing: .12em; line-height: 1.35; }
+.brand-mark { width: 46px; height: 57px; flex-basis: 46px; font-size: 2.3rem; }
+.brand p { margin: .45rem 0 0 3.9rem; font-size: .68rem; letter-spacing: .07em; line-height: 1.65; }
+.site-header nav ul { gap: .55rem 1.4rem; align-items: center; }
+.site-header nav a { font-size: .96rem; line-height: 1.5; min-height: 48px; padding-block: .6rem; }
+
+.menu-toggle { min-height: 48px; font-size: .94rem; padding: .65rem 1rem; }
+.site-footer { padding-inline: max(var(--gutter), calc((100% - 1440px) / 2 + var(--gutter))); }
+.site-footer nav a { display: inline-block; min-height: 44px; padding-block: .45rem; font-size: .9rem; }
+/* Ritmo tipográfico: margens previsíveis e leitura alinhada à esquerda. */
+h1, h2, h3 { margin-top: 0; }
+h2 { line-height: 1.18; }
+h3 { line-height: 1.22; }
+main p { line-height: 1.8; }
+main :is(section, article, header) > p:last-child { margin-bottom: 0; }
+.page-intro { column-gap: var(--layout-gap); padding-top: var(--section-space); }
+.page-intro .eyebrow { padding-top: 1.25rem; margin-bottom: 1.5rem; }
+.page-intro h1 { margin-bottom: 1.5rem; }
+.page-intro > p:not(.eyebrow) { margin-bottom: 1.25rem; }
+.page-intro > p[id] { padding-top: 1.25rem; }
+.eyebrow { font-size: .72rem; letter-spacing: .16em; }
+main > section, .suite-editorial { scroll-margin-top: 2rem; }
+.card-copy, .suite-editorial-copy { text-align: left; }
+.card-copy { padding: var(--panel-space); }
+.card-copy h3 { margin-bottom: 1rem; }
+.card-copy > p { line-height: 1.8; }
+.card-copy dl { margin-block: .5rem 1.5rem; }
+.card-copy > p:last-child:has(a), .card-copy .suite-selection { padding-top: 1rem; }
+.card-copy > p:has(a) { margin-bottom: 0; }
+.card-copy a { line-height: 1.6; }
+.collection-card { align-self: stretch; }
+.carousel-bar { min-height: 48px; margin-bottom: 1.25rem; gap: 1rem; }
+.carousel-track { gap: var(--layout-gap); align-items: stretch; }
+.scroll-hint { font-size: .68rem; letter-spacing: .06em; }
+.carousel-count { font-size: .73rem; min-width: 4.2rem; }
+.carousel-controls button { width: 48px; height: 48px; min-height: 48px; }
+.section-heading { column-gap: var(--layout-gap); }
+.section-heading > a { line-height: 1.65; }
+dl { line-height: 1.65; }
+dt, dd { padding-block: .85rem; }
+/* Colunas editoriais preservam suas diferenças de escala, com intervalos comuns. */
+.main-home { column-gap: var(--layout-gap); }
+.home-hero { column-gap: var(--layout-gap); }
+.art-hero { margin-left: 0; }
+.hero-copy > p:not(.eyebrow):not(h1 + p) { font-size: .95rem; }
+.hero-copy > p:has(a) { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; }
+.hero-copy > p:has(a) a { margin: 0; }
+.hero-copy .edition-index a { font-size: .72rem; }
+.main-home .home-collection, .main-home .home-experiences { gap: var(--layout-gap); align-items: start; }
+.main-home .editorial-stay { padding: var(--panel-space); }
+.editorial-stay > p, .editorial-moments > p { font-size: .95rem; }
+.home-collection .section-heading > a { margin-top: 1rem; }
+.home-experiences .section-heading { align-self: center; }
+.hospitality-panel { column-gap: var(--layout-gap); }
+.main-suites { column-gap: var(--layout-gap); }
+.main-suites .card-copy { padding: var(--panel-space); }
+.main-suites .card-illustration { height: auto; align-self: stretch; }
+.main-suites > section[aria-labelledby='comforts'] { padding-inline: var(--panel-space); }
+.main-suites > section[aria-labelledby='comforts'] :is(p, li) { font-size: .9rem; }
+.main-experiences .experience-heading { column-gap: var(--layout-gap); align-items: start; }
+.chapter-cards { gap: var(--layout-gap); }
+.chapter-cards .card-copy { padding: var(--panel-space); }
+.main-experiences > section[aria-labelledby='arrangements'] { column-gap: var(--layout-gap); }
+.suite-editorial .suite-editorial-copy { padding: var(--panel-space); }
+.main-details > section[aria-labelledby='planning'] { column-gap: var(--layout-gap); }
+.main-reservations, .main-contact, .main-checkout, .main-my-reservations, .main-administration { column-gap: var(--layout-gap); row-gap: 2rem; }
+.main-reservations > section[aria-labelledby='stay-preferences'],
+.main-contact > section[aria-labelledby='enquiry'] { margin-top: var(--section-space); padding: var(--panel-space); }
+.main-reservations > section[aria-labelledby='next'] { padding: 1.25rem 0 0; border-left: 0; border-top: 1px solid var(--line); }
+.main-reservations > section[aria-labelledby='before'] p { font-size: .92rem; }
+.main-checkout > section[aria-labelledby='guest'],
+.main-checkout > section[aria-labelledby='summary'] { padding: var(--panel-space); margin-right: 0; }
+.main-checkout #selected-stay { font-size: .86rem; }
+.main-checkout .summary-footnote { font-size: .78rem; }
+.main-my-reservations > section[aria-labelledby='find'] { padding: var(--panel-space); column-gap: var(--layout-gap); align-items: start; }
+.main-my-reservations section[aria-labelledby='find'] h2 { align-self: start; }
+.main-my-reservations > section[aria-labelledby='record'],
+.main-my-reservations section[aria-labelledby='record'] article { padding: var(--panel-space); }
+.main-contact > section[aria-labelledby='arrival'] { column-gap: var(--layout-gap); }
+.main-contact section[aria-labelledby='relations'] address { padding-top: 0; }
+.main-administration > .page-intro, .main-administration > section[aria-labelledby='access'] { padding: var(--panel-space); }
+.main-administration section[aria-labelledby='overview'] dl { gap: 0 1rem; }
+/* Formulários: rótulos, controles e mensagens seguem as mesmas linhas. */
+form { width: 100%; }
+fieldset { gap: 1.25rem; margin-bottom: 1.5rem; }
+fieldset:last-child { margin-bottom: 0; }
+fieldset > p { min-width: 0; max-width: none; }
+fieldset label, .field-label { font-size: .88rem; line-height: 1.5; }
+fieldset legend { padding-bottom: 1rem; margin-bottom: 1rem; font-size: .7rem; line-height: 1.6; }
+input:not([type='checkbox']), select, textarea { min-height: 52px; font-size: .96rem; line-height: 1.5; }
+fieldset > button { min-height: 52px; font-size: .9rem; line-height: 1.6; }
+.capacity-note { margin: 0; font-size: .84rem; }
+#reservation-form > .form-message { max-width: none; }
+#reservation-form fieldset > p:has(#suite) { grid-column: 1 / -1; }
+/* Datas independentes. Menus nativos oferecem listas roláveis e seleção por toque/teclado. */
+.date-field { grid-column: 1 / -1; min-width: 0; }
+.field-label { display: block; font-weight: 600; color: var(--olive); margin-bottom: .65rem; }
+.date-parts { display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 1.5fr) minmax(0, 1fr); gap: .75rem; }
+.date-parts > div { min-width: 0; }
+.date-parts label { display: block; font-size: .72rem; color: var(--muted); margin-bottom: .4rem; }
+.date-parts select { appearance: auto; padding: .75rem .6rem; background: var(--paper); color: var(--olive); border-color: #b8ad96; cursor: pointer; }
+.date-parts select:hover:not(:disabled) { border-color: var(--gold); }
+.date-parts select:focus-visible { outline-offset: 3px; }
+.date-parts option { background: var(--paper); color: var(--ink); }
+.date-parts option:disabled { color: var(--muted); }
+.date-help { max-width: none; min-height: 1.5em; margin: .6rem 0 0; font-size: .76rem; line-height: 1.6; color: var(--muted); }
+.has-date-error .date-help { color: #763c29; }
+.has-date-error select { border-color: #8f4f37; }
+@media (max-width: 1240px) and (min-width: 801px) {
+  .site-header { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .site-header nav { width: 100%; border-top: 1px solid var(--line); padding-top: .75rem; }
+  .site-header nav ul { justify-content: flex-start; column-gap: 1.65rem; }
+  .brand-name { font-size: 1.45rem; }
+}
+@media (min-width: 1001px) {
+  .main-reservations > section[aria-labelledby='stay-preferences'],
+  .main-contact > section[aria-labelledby='enquiry'] { align-self: start; }
+  .main-checkout > section[aria-labelledby='summary'] { grid-column: 8 / -1; }
+  .main-checkout > section[aria-labelledby='guest'] { grid-column: 1 / 8; }
+}
+@media (max-width: 1000px) {
+  .main-reservations > section[aria-labelledby='stay-preferences'],
+  .main-contact > section[aria-labelledby='enquiry'] { margin-top: 0; }
+  .main-reservations > section, .main-checkout > section, .main-contact > section,
+  .main-my-reservations > section, .main-administration > section { margin-block: 2rem; }
+  .main-my-reservations > section[aria-labelledby='find'] { gap: var(--layout-gap); }
+  .main-contact section[aria-labelledby='relations'] .architectural-art { margin-left: var(--layout-gap); }
+}
+@media (max-width: 800px) {
+  .site-header { grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; padding-block: 1.4rem; }
+  .brand-name { font-size: 1.2rem; }
+  .brand p { font-size: .65rem; }
+  .site-header nav { border-top: 1px solid var(--line); padding-top: 1rem; }
+  .site-header nav ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem 1.25rem; }
+  .site-header nav a { font-size: 1rem; width: 100%; min-height: 50px; }
+  
+  .page-intro { padding-top: 3rem; }
+  .main-home .editorial-moments { column-gap: var(--layout-gap); }
+  .main-home .hospitality-panel { margin-inline: 0; }
+  .main-my-reservations > section[aria-labelledby='record'] { margin-left: 0; }
+  .main-details > section[aria-labelledby='planning'],
+  .main-experiences > section[aria-labelledby='arrangements'] { margin-left: 0; }
+  .main-suites > section[aria-labelledby='comforts'] { column-gap: var(--layout-gap); }
+  .suite-editorial .suite-editorial-copy { padding: var(--panel-space); }
+  .chapter-cards .card-copy > p { font-size: .9rem; }
+}
+@media (max-width: 540px) {
+  :root { --layout-gap: 1.25rem; --panel-space: 1.4rem; }
+  .site-header { gap: 1rem .75rem; }
+  .brand-name { font-size: 1rem; letter-spacing: .06em; gap: .65rem; white-space: normal; }
+  .brand-mark { width: 34px; height: 44px; flex-basis: 34px; font-size: 1.9rem; }
+  .brand p { margin-left: 2.8rem; font-size: .6rem; letter-spacing: .02em; }
+  .menu-toggle { font-size: .85rem; padding: .6rem .75rem; }
+  .menu-toggle span { margin-left: .35rem; }
+  .site-header nav a { font-size: .94rem; }
+  .site-header nav ul { gap: .4rem .85rem; }
+  .page-intro { padding-top: 2.5rem; }
+  .eyebrow { font-size: .66rem; }
+  .hero-copy h1 { font-size: clamp(3.7rem, 17vw, 5.5rem); }
+  .hero-copy > p:not(.eyebrow):not(h1 + p) { font-size: .94rem; }
+  .hero-copy > p:has(a) { display: block; }
+  .hero-copy > p:has(a) a { margin-block: .35rem; }
+  .main-home .editorial-stay { margin-right: 0; }
+  .main-home .editorial-moments { margin-left: 0; }
+  .main-home .home-experiences { padding: var(--panel-space); }
+  .scroll-hint { font-size: .62rem; letter-spacing: .025em; }
+  .carousel-count { min-width: 3.7rem; font-size: .68rem; }
+  .carousel-bar { gap: .7rem; }
+  .main-suites .card-illustration { height: 245px; }
+  .chapter-cards .card-copy { padding: var(--panel-space); }
+  .chapter-cards .card-copy p { font-size: .88rem; }
+  .suite-editorial .suite-editorial-copy { padding: var(--panel-space); }
+  .main-contact > section[aria-labelledby='enquiry'] { box-shadow: none; }
+  .main-contact section[aria-labelledby='relations'] .architectural-art { margin-left: 1rem; }
+  .date-parts { grid-template-columns: minmax(0, .8fr) minmax(0, 1.35fr) minmax(0, 1fr); gap: .5rem; }
+  .date-parts select { padding-inline: .35rem; font-size: .86rem; }
+  .date-help { font-size: .76rem; }
+  .site-footer nav ul { column-gap: 1rem; }
+}
+@media (forced-colors: active) {
+  .has-date-error select { border-color: Mark; }
+  .has-date-error .date-help { color: CanvasText; }
+}
+
+/* Recuo uniforme da seta, sem alterar bordas, dimensões ou alinhamento do texto. */
+select, .date-parts select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: right 19px center, right 14px center;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 2.25rem;
+}
