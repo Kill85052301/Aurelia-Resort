@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#343c2d">
+  <title>Reservas | AURELIA RESORT</title>
+  <meta name="description" content="Planeje uma estadia demonstrativa no AURELIA RESORT, sem reserva real ou cobrança.">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/refinements.css">
+  <link rel="stylesheet" href="assets/css/photography.css">
+  <link rel="stylesheet" href="assets/css/ui-spacing.css">
+  <link rel="stylesheet" href="assets/css/editorial-cleanup.css">
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/stay.js" defer></script>
+  <script src="assets/js/reservation.js" defer></script>
+  <link rel="stylesheet" href="assets/css/motion.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <script src="assets/js/motion-bootstrap.js"></script>
+  <script src="assets/vendor/gsap/gsap.min.js" defer></script>
+  <script src="assets/vendor/gsap/ScrollTrigger.min.js" defer></script>
+  <script src="assets/js/motion.js" defer></script>
+</head>
+<body class="page-reservations">
+  <a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
+  <header class="site-header"><div class="brand"><a href="index.html" class="brand-name"><span class="brand-mark" aria-hidden="true">A</span><span>AURELIA RESORT</span></a><p>Um refúgio cinco estrelas à beira-mar</p></div><button class="menu-toggle" type="button" aria-controls="primary-navigation" aria-expanded="false" hidden>Menu <span aria-hidden="true">☰</span></button><nav id="primary-navigation" aria-label="Navegação principal">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="suites.html">Suítes</a></li>
+        <li><a href="experiences.html">Experiências</a></li>
+        <li><a href="reservations.html" aria-current="page">Reservas</a></li>
+        <li><a href="contact.html">Contato</a></li>
+      </ul>
+    </nav><details class="account-menu"><summary class="account-toggle" aria-label="Opções da conta" aria-controls="account-links"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 21v-2a7.5 7.5 0 0 1 15 0v2"/></svg></summary><div class="account-panel" id="account-links"><p>Sua conta</p><ul><li><a href="my-reservations.html">Minhas reservas</a></li><li><a href="administration.html">Administração</a></li></ul></div></details></header>
+  <main id="main-content" class="main-reservations"><header class="page-intro"><p class="eyebrow">Seu próximo capítulo</p>
+
+<h1>Reservas</h1><p>Escolha a suíte, as datas e quem acompanha você.</p>
+<p id="reservation-notice"><strong>Simulação de estadia.</strong> Sem disponibilidade real, confirmação de reserva ou cobrança.</p>
+<span class="intro-monogram" aria-hidden="true">A</span></header><section aria-labelledby="stay-preferences"><picture class="resort-picture stay-preview"><img src="assets/images/pool-suite-1280.webp" srcset="assets/images/pool-suite-640.webp 640w, assets/images/pool-suite-1280.webp 1280w" sizes="(max-width: 540px) 90vw, (max-width: 1000px) 70vw, 720px" width="1280" height="853" alt="Acomodação de luxo com piscina privativa, terraço e área de estar ao ar livre" loading="lazy" decoding="async"></picture><h2 id="stay-preferences">Sua estadia</h2><form id="reservation-form" action="reservations.html" method="get" aria-describedby="reservation-notice reservation-error"><p id="reservation-error" class="form-message" role="alert" tabindex="-1" hidden></p><noscript><p class="form-message">Ative o JavaScript para selecionar sua estadia e acessar a revisão demonstrativa.</p></noscript><fieldset disabled><legend>Preferências da estadia</legend>
+<div class="date-field" id="arrival-group" role="group" aria-labelledby="arrival-label" aria-describedby="arrival-help">
+  <span class="field-label" id="arrival-label">Data de entrada</span>
+  <input type="hidden" id="arrival" name="arrival">
+  <div class="date-parts">
+    <div><label for="arrival-day">Dia</label><select id="arrival-day" data-date-part="day" required aria-describedby="arrival-help"></select></div>
+    <div><label for="arrival-month">Mês</label><select id="arrival-month" data-date-part="month" required aria-describedby="arrival-help"></select></div>
+    <div><label for="arrival-year">Ano</label><select id="arrival-year" data-date-part="year" required aria-describedby="arrival-help"></select></div>
+  </div>
+  <p class="date-help" id="arrival-help" role="status" aria-live="polite">Escolha o dia, o mês e o ano.</p>
+</div>
+<div class="date-field" id="departure-group" role="group" aria-labelledby="departure-label" aria-describedby="departure-help">
+  <span class="field-label" id="departure-label">Data de saída</span>
+  <input type="hidden" id="departure" name="departure">
+  <div class="date-parts">
+    <div><label for="departure-day">Dia</label><select id="departure-day" data-date-part="day" required aria-describedby="departure-help"></select></div>
+    <div><label for="departure-month">Mês</label><select id="departure-month" data-date-part="month" required aria-describedby="departure-help"></select></div>
+    <div><label for="departure-year">Ano</label><select id="departure-year" data-date-part="year" required aria-describedby="departure-help"></select></div>
+  </div>
+  <p class="date-help" id="departure-help" role="status" aria-live="polite">Escolha o dia, o mês e o ano.</p>
+</div>
+<p><label for="adults">Adultos</label><br><select id="adults" name="adults" required><option>1</option><option selected>2</option><option>3</option><option>4</option></select></p>
+<p><label for="children">Crianças</label><br><select id="children" name="children" required><option selected>0</option><option>1</option><option>2</option><option>3</option></select></p>
+<p><label for="suite">Suíte desejada</label><br><select id="suite" name="suite" required aria-describedby="suite-capacity"><option value="">Selecione uma suíte</option><option value="ocean-terrace">Suíte Terraço do Mar</option><option value="private-pool">Suíte Piscina Privativa</option><option value="signature-residence">Residência Exclusiva Aurelia</option></select></p>
+<p id="suite-capacity" class="capacity-note">Selecione uma suíte para consultar a ocupação máxima.</p><button type="submit" id="continue-stay" disabled>Continuar para a revisão da estadia <span aria-hidden="true">→</span></button></fieldset></form></section>
+<section aria-labelledby="before"><h2 id="before">Antes de reservar</h2><p>Ocupação conforme a suíte. Acessibilidade, camas extras e pedidos especiais dependerão de confirmação.</p><p><a href="suites.html">Compare suítes e tarifas ilustrativas</a></p></section>
+<section aria-labelledby="next"><h2 id="next">O próximo passo</h2><p>Confira sua seleção na próxima etapa. Valores ilustrativos, sem cobrança.</p><p><a href="#stay-preferences">Preencher minha estadia</a> · <a href="my-reservations.html">Ver Minhas reservas</a></p></section>
+  </main>
+  <footer class="site-footer footer-minimal"><a class="footer-brand" href="index.html">AURELIA RESORT</a><nav aria-label="Navegação do rodapé"><ul><li><a href="reservations.html">Reservas</a></li><li><a href="contact.html">Contato</a></li></ul></nav><small class="footer-copyright">&copy; 2026 AURELIA RESORT · Conceito fictício.</small></footer>
+</body>
+</html>
