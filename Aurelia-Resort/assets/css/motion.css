@@ -1,0 +1,22 @@
+html[data-motion-pending='true'] main { visibility: hidden; }
+.site-header nav a[aria-current='page'] { text-decoration-line: none; }
+.suite-carousel, .suite-carousel *, .suite-carousel *::before, .suite-carousel *::after {
+ transition: none;
+ animation: none;
+}
+/* Somente propriedades de pintura: não altera medidas, grades ou posicionamento. */
+@media(prefers-reduced-motion:no-preference) {
+ .site-header nav a, .account-panel a, .footer-minimal nav a {
+  text-decoration-color: transparent; text-decoration-line: underline;
+  text-decoration-thickness: 1px; text-underline-offset: .45em;
+  transition: color .2s ease, text-decoration-color .2s ease;
+ }
+ .site-header nav a:hover, .account-panel a:hover, .footer-minimal nav a:hover { text-decoration-color: currentColor; }
+ button:not(:disabled), .text-cta { transition: box-shadow .2s ease; }
+ button:not(:disabled):hover, .text-cta:hover { box-shadow: 0 3px 10px #292b2518; }
+}
+@media(prefers-reduced-motion:reduce) {
+ html[data-motion-pending='true'] main { visibility: visible; }
+ .carousel-track { scroll-behavior: auto !important; }
+}
+.suite-carousel :is(button, a, .text-cta) { transition: none; animation: none; }
