@@ -1,0 +1,41 @@
+.contact-page {width:100%;max-width:none;margin:0;padding:0;background:#faf5ed}
+.contact-page .contact-hero {display:block;margin:0;border:0;padding:6rem max(5vw,calc((100% - 80rem)/2)) 1.5rem;color:white;background:linear-gradient(90deg,#16273dcf,transparent),url("../images/hero-1920.webp") center 54%/cover}
+.contact-hero h1 {font-size:clamp(2.8rem,3.7vw,4.6rem);line-height:1.08;margin:.3rem 0}
+.contact-hero .eyebrow {color:#f0ce90}
+.contact-hero p:last-child {font:italic 1.15rem/1.5 var(--serif);color:inherit;max-width:64ch;margin:0}
+.contact-layout {width:min(90%,80rem);margin:2rem auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem 1.75rem;align-items:start}
+.contact-view {grid-column:1;aspect-ratio:2.9;position:relative;overflow:hidden;border-radius:1rem}
+.contact-view picture,.contact-view img {display:block;width:100%;height:100%;object-fit:cover}
+.contact-layout section {margin:0;min-width:0}
+.contact-layout h2 {font-size:clamp(1.55rem,2.3vw,2.5rem);margin:0 0 .65rem}
+.contact-layout [aria-labelledby=relations] {grid-column:1;grid-row:2;padding:0 1.4rem}
+.contact-layout address {font-style:normal;line-height:1.9;overflow-wrap:anywhere}
+.contact-layout address + p {border-top:1px solid var(--line);padding-top:.8rem;margin-bottom:0}
+.contact-layout :is([aria-labelledby=enquiry],[aria-labelledby=arrival]) {padding:clamp(1rem,2vw,2.2rem);background:#fcf7ef;border:1px solid #e3d8c7;border-radius:1rem;box-shadow:0 3px 15px #42351d12}
+.contact-layout [aria-labelledby=enquiry] {grid-area:1/2/span 3/3;align-self:stretch}
+.contact-layout [aria-labelledby=arrival] {grid-column:1;grid-row:3}
+.contact-layout [aria-labelledby=arrival] h2 {font-size:1.45rem}
+.contact-layout [aria-labelledby=arrival] a {display:inline-block;border:1px solid var(--gold);padding:.55rem .8rem;border-radius:.45rem;text-decoration:none;margin:.2rem 0}
+.contact-layout fieldset {min-width:0;margin:1.4rem 0 0}
+.contact-layout :is(input,select,textarea,button) {border-radius:.45rem}
+.contact-layout button:disabled {color:#fff8ec;background:#213b2c}
+.contact-band {background:#203a2b;color:#fff9ee;display:grid;grid-template-columns:repeat(3,1fr);text-align:center;padding:1.4rem 5vw}
+.contact-band div+div {border-inline-start:1px solid #8f9989}
+.contact-band h3 {margin:0;font-size:1.35rem}
+.contact-band p {margin:.25rem 0}
+.page-contact .footer-minimal {max-width:none;margin:0;background:#193325;border-top:1px solid #b7b6a7}
+@media(min-width:801px){
+.page-contact .site-header {position:absolute;inset:0 0 auto;z-index:5;background:transparent;color:white;border:0}
+.page-contact .site-header :is(a,.brand p) {color:white}
+}
+@media(max-width:800px){
+.contact-page .contact-hero {padding-top:2.5rem}
+.contact-layout {grid-template-columns:minmax(0,1fr)}
+.contact-layout section[aria-labelledby] {grid-area:auto}
+}
+@media(max-width:540px){
+.contact-layout fieldset,.contact-band {grid-template-columns:minmax(0,1fr)}
+.contact-band {gap:1rem}
+.contact-band div+div {border:0}
+.contact-layout [aria-labelledby=relations] {padding:0 .4rem}
+}

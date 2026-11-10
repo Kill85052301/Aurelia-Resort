@@ -2,18 +2,6 @@
 .site-header { position: relative; z-index: 20; grid-template-columns: minmax(260px,310px) minmax(0,1fr) auto; column-gap: clamp(1rem,2vw,2rem); }
 .site-header > .brand { grid-column: 1; grid-row: 1; }
 .site-header > #primary-navigation { grid-column: 2; grid-row: 1; }
-.site-header > .account-menu { grid-column: 3; grid-row: 1; justify-self: end; }
-.account-menu { position: relative; min-width: 48px; color: var(--olive); }
-.account-toggle { list-style: none; width: 48px; min-height: 48px; display: grid; place-items: center; padding: .65rem; border: 1px solid var(--line); border-radius: 50%; cursor: pointer; background: var(--paper); }
-.account-toggle::-webkit-details-marker { display: none; }
-.account-toggle:hover, .account-menu[open] .account-toggle { background: var(--sand); border-color: var(--gold); }
-.account-toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
-.account-panel { position: absolute; top: calc(100% + .75rem); right: 0; z-index: 30; width: min(245px,calc(100vw - 2.5rem)); padding: 1rem; border: 1px solid var(--line); background: var(--paper); box-shadow: 0 8px 24px #292b2514; }
-.account-panel p { margin: 0 0 .6rem; padding: .25rem .7rem .7rem; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; }
-.account-panel ul { list-style: none; margin: 0; padding: 0; }
-.account-panel li { padding: 0; margin: 0; }
-.account-panel a { display: flex; align-items: center; min-height: 48px; padding: .75rem .7rem; font-size: .95rem; line-height: 1.6; text-decoration: none; overflow-wrap: anywhere; }
-.account-panel a:hover, .account-panel a[aria-current] { background: var(--sand); color: var(--olive); }
 /* Folga para rótulos longos, ícones e quebras em controles. */
 button, .text-cta { max-width: 100%; white-space: normal; overflow-wrap: anywhere; line-height: 1.6; }
 button:not(.menu-toggle):not(.carousel-controls button) { padding: .85rem 1.25rem; }
@@ -39,13 +27,11 @@ fieldset legend { white-space: normal; overflow-wrap: anywhere; }
 @media (min-width:801px) and (max-width:1240px) {
  .site-header { grid-template-columns: minmax(0,1fr) auto; }
  .site-header > .brand { grid-column: 1; }
- .site-header > .account-menu { grid-column: 2; }
  .site-header > #primary-navigation { grid-column: 1/-1; grid-row: 2; }
 }
 @media (max-width:800px) {
  .site-header { grid-template-columns: minmax(0,1fr) auto auto; column-gap: .75rem; }
  .site-header > .menu-toggle { grid-column: 2; grid-row: 1; }
- .site-header > .account-menu { grid-column: 3; }
  .site-header > #primary-navigation { grid-column: 1/-1; grid-row: 2; }
 }
 @media (max-width:540px) {
@@ -54,12 +40,8 @@ fieldset legend { white-space: normal; overflow-wrap: anywhere; }
  .site-header .brand p { margin-left: 0; }
  .site-header .menu-toggle { padding: .6rem .55rem; font-size: .8rem; }
  .site-header .menu-toggle span { margin-left: .25rem; }
- .account-menu { min-width: 44px; }
- .account-toggle { width: 44px; min-height: 44px; padding: .55rem; }
- .account-panel { padding: .8rem; }
  .carousel-controls { gap: .4rem; }
 }
 @media (forced-colors:active) {
- .account-toggle, .account-panel { border-color: CanvasText; }
  .main-suites .suite-carousel .carousel-track { scrollbar-color: auto; }
 }

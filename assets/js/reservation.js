@@ -111,7 +111,18 @@
       ? 'A saída deve ser posterior à entrada. Ajuste a data de saída.'
       : departure && departure <= stay.today() ? 'A saída deve ser posterior à data de hoje.' : '');
   };
+  const bookingPhoto = document.querySelector('.booking-photo');
+  const suiteImages = {
+    'ocean-terrace': 'ocean-suite',
+    'private-pool': 'pool-suite',
+    'signature-residence': 'residence'
+  };
   const updateCapacity = () => {
+    if (bookingPhoto) {
+      const image = suiteImages[fields.suite.value] || 'ocean-suite';
+      const imageUrl = new URL('assets/images/' + image + '-1280.webp', document.baseURI);
+      bookingPhoto.style.setProperty('--booking-image', 'url("' + imageUrl.href + '")');
+    }
     const suite = stay.suites[fields.suite.value];
     capacity.textContent = suite
       ? `${suite.name}: até ${suite.capacity} hóspedes no total, incluindo adultos e crianças. Diária ilustrativa a partir de ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(suite.rate)}.`

@@ -78,7 +78,7 @@ dt, dd { padding-block: .85rem; }
 .main-experiences > section[aria-labelledby='arrangements'] { column-gap: var(--layout-gap); }
 .suite-editorial .suite-editorial-copy { padding: var(--panel-space); }
 .main-details > section[aria-labelledby='planning'] { column-gap: var(--layout-gap); }
-.main-reservations, .main-contact, .main-checkout, .main-my-reservations, .main-administration { column-gap: var(--layout-gap); row-gap: 2rem; }
+.main-reservations, .main-contact, .main-checkout{ column-gap: var(--layout-gap); row-gap: 2rem; }
 .main-reservations > section[aria-labelledby='stay-preferences'],
 .main-contact > section[aria-labelledby='enquiry'] { margin-top: var(--section-space); padding: var(--panel-space); }
 .main-reservations > section[aria-labelledby='next'] { padding: 1.25rem 0 0; border-left: 0; border-top: 1px solid var(--line); }
@@ -87,14 +87,8 @@ dt, dd { padding-block: .85rem; }
 .main-checkout > section[aria-labelledby='summary'] { padding: var(--panel-space); margin-right: 0; }
 .main-checkout #selected-stay { font-size: .86rem; }
 .main-checkout .summary-footnote { font-size: .78rem; }
-.main-my-reservations > section[aria-labelledby='find'] { padding: var(--panel-space); column-gap: var(--layout-gap); align-items: start; }
-.main-my-reservations section[aria-labelledby='find'] h2 { align-self: start; }
-.main-my-reservations > section[aria-labelledby='record'],
-.main-my-reservations section[aria-labelledby='record'] article { padding: var(--panel-space); }
 .main-contact > section[aria-labelledby='arrival'] { column-gap: var(--layout-gap); }
 .main-contact section[aria-labelledby='relations'] address { padding-top: 0; }
-.main-administration > .page-intro, .main-administration > section[aria-labelledby='access'] { padding: var(--panel-space); }
-.main-administration section[aria-labelledby='overview'] dl { gap: 0 1rem; }
 /* Formulários: rótulos, controles e mensagens seguem as mesmas linhas. */
 form { width: 100%; }
 fieldset { gap: 1.25rem; margin-bottom: 1.5rem; }
@@ -136,9 +130,7 @@ fieldset > button { min-height: 52px; font-size: .9rem; line-height: 1.6; }
 @media (max-width: 1000px) {
   .main-reservations > section[aria-labelledby='stay-preferences'],
   .main-contact > section[aria-labelledby='enquiry'] { margin-top: 0; }
-  .main-reservations > section, .main-checkout > section, .main-contact > section,
-  .main-my-reservations > section, .main-administration > section { margin-block: 2rem; }
-  .main-my-reservations > section[aria-labelledby='find'] { gap: var(--layout-gap); }
+  .main-reservations > section, .main-checkout > section, .main-contact > section{ margin-block: 2rem; }
   .main-contact section[aria-labelledby='relations'] .architectural-art { margin-left: var(--layout-gap); }
 }
 @media (max-width: 800px) {
@@ -152,7 +144,6 @@ fieldset > button { min-height: 52px; font-size: .9rem; line-height: 1.6; }
   .page-intro { padding-top: 3rem; }
   .main-home .editorial-moments { column-gap: var(--layout-gap); }
   .main-home .hospitality-panel { margin-inline: 0; }
-  .main-my-reservations > section[aria-labelledby='record'] { margin-left: 0; }
   .main-details > section[aria-labelledby='planning'],
   .main-experiences > section[aria-labelledby='arrangements'] { margin-left: 0; }
   .main-suites > section[aria-labelledby='comforts'] { column-gap: var(--layout-gap); }

@@ -53,7 +53,7 @@
     { scale: 1.04, yPercent: 1, ease: 'none', scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: .6 } });
   });
 
-  document.querySelectorAll('.main-reservations > section, .contact-postcard > section, .main-my-reservations > section, .main-checkout > section, .main-administration > section, .credit-entry').forEach(section => {
+  document.querySelectorAll('.main-reservations > section, .contact-postcard > section, .main-checkout > section, .credit-entry').forEach(section => {
    reveal(section, section);
   });
   const contactPhoto = document.querySelector('.contact-postcard > .architectural-art');

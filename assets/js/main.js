@@ -5,24 +5,6 @@
   const menuButton = document.querySelector('.menu-toggle');
   const navigation = document.getElementById('primary-navigation');
   const mobile = window.matchMedia('(max-width: 800px)');
-  const accountMenu = document.querySelector('.account-menu');
-  if (accountMenu) {
-    const accountToggle = accountMenu.querySelector('summary');
-    document.addEventListener('click', event => {
-      if (!accountMenu.contains(event.target)) accountMenu.open = false;
-    });
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && accountMenu.open) {
-        accountMenu.open = false;
-        accountToggle.focus();
-      }
-    });
-    accountMenu.addEventListener('focusout', event => {
-      if (event.relatedTarget && !accountMenu.contains(event.relatedTarget)) accountMenu.open = false;
-    });
-    menuButton?.addEventListener('click', () => { accountMenu.open = false; });
-  }
-
   if (menuButton && navigation) {
     const setOpen = (open, returnFocus = false) => {
       navigation.hidden = mobile.matches && !open;
@@ -37,9 +19,6 @@
     };
     menuButton.addEventListener('click', () => {
       setOpen(menuButton.getAttribute('aria-expanded') !== 'true');
-    });
-    accountMenu?.addEventListener('toggle', () => {
-      if (accountMenu.open && mobile.matches) setOpen(false);
     });
     document.addEventListener('keydown', event => {
       if (event.key === 'Escape' && mobile.matches && !navigation.hidden) {
@@ -59,6 +38,7 @@
     const count = controls.querySelector('.carousel-count');
     const cards = Array.from(track.children);
     if (!cards.length) return;
+    const homeSuites = track.id === 'home-suites-track';
     const smoothCollection = carousel.dataset.scrollBehavior === 'smooth';
     const behavior = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
 
@@ -78,6 +58,10 @@
       const max = maximum();
       const current = Math.max(0, track.scrollLeft);
       controls.hidden = max <= 2;
+      if (homeSuites) {
+        carousel.classList.toggle('carousel-fits', max <= 2);
+        track.tabIndex = max <= 2 ? -1 : 0;
+      }
       const offsets = positions();
       previous.disabled = current <= offsets[0] + 2;
       next.disabled = current >= offsets[offsets.length - 1] - 2;
@@ -87,48 +71,9 @@
       const label = `${String(index + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
       if (count.textContent !== label) count.textContent = label;
     };
-    const suiteCarousel = carousel.classList.contains('suite-carousel');
-    let suiteSliding = false;
-    let suiteDestination = 0;
-    let suiteTargetIndex = 0;
-    let suiteTimer;
-    let lastSuiteWheel = -Infinity;
-    const releaseSuite = () => {
-      clearTimeout(suiteTimer);
-      suiteSliding = false;
-    };
-    const suiteIndex = () => {
-      const offsets = positions();
-      return offsets.reduce((best, offset, i) =>
-        Math.abs(offset - track.scrollLeft) < Math.abs(offsets[best] - track.scrollLeft) ? i : best, 0);
-    };
-    const slideSuiteTo = index => {
-      if (suiteSliding) {
-        track.scrollTo({ left: track.scrollLeft, behavior: 'instant' });
-        releaseSuite();
-      }
-      const offsets = positions();
-      suiteTargetIndex = Math.max(0, Math.min(cards.length - 1, index));
-      suiteDestination = offsets[suiteTargetIndex];
-      if (Math.abs(track.scrollLeft - suiteDestination) < 2) return;
-      suiteSliding = true;
-      track.scrollTo({ left: suiteDestination, behavior: behavior() });
-      // Compatibilidade com navegadores sem scrollend e com rolagens interrompidas.
-      suiteTimer = setTimeout(releaseSuite, 1800);
-    };
-    if (suiteCarousel) {
-      track.addEventListener('scroll', () => {
-        if (suiteSliding && Math.abs(track.scrollLeft - suiteDestination) < 2) releaseSuite();
-      }, { passive: true });
-      track.addEventListener('scrollend', () => {
-        if (Math.abs(track.scrollLeft - suiteDestination) < 2) releaseSuite();
-      });
-    }
     const go = direction => {
-      if (suiteCarousel) {
-        slideSuiteTo((suiteSliding ? suiteTargetIndex : suiteIndex()) + direction);
-        return;
-      }
+      if (homeSuites && maximum() <= 2) return;
+
       const offsets = positions();
       const current = track.scrollLeft;
       let destination;
@@ -144,16 +89,13 @@
     previous.addEventListener('click', () => go(-1));
     next.addEventListener('click', () => go(1));
     track.addEventListener('keydown', event => {
-      if (event.target !== track) return;
+      if (event.target !== track || (homeSuites && maximum() <= 2)) return;
       if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
         event.preventDefault();
         go(event.key === 'ArrowRight' ? 1 : -1);
       } else if (event.key === 'Home' || event.key === 'End') {
         event.preventDefault();
-        if (suiteCarousel) {
-          slideSuiteTo(event.key === 'Home' ? 0 : cards.length - 1);
-          return;
-        }
+  
         track.scrollTo({ left: event.key === 'Home' ? 0 : maximum(), behavior: behavior() });
         update();
       }
@@ -161,29 +103,12 @@
     track.addEventListener('scroll', update, { passive: true });
     // Trackpads e rodas horizontais mantêm o comportamento nativo. A roda
     // vertical também explora a coleção, liberando a página ao chegar às bordas.
+    if (!carousel.hasAttribute('data-native-scroll')) {
     let wheelTarget = null;
     let lastWheel = 0;
     let lastWheelDirection = 0;
     track.addEventListener('wheel', event => {
-      if (event.ctrlKey) return;
-      if (suiteCarousel) {
-        const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
-        if (!delta) return;
-        const now = performance.now();
-        const sameGesture = now - lastSuiteWheel < 240;
-        lastSuiteWheel = now;
-        const direction = Math.sign(delta);
-        const index = suiteIndex();
-        if (!sameGesture && !suiteSliding &&
-            ((direction < 0 && index === 0 && track.scrollLeft <= 2) ||
-             (direction > 0 && index === cards.length - 1 && track.scrollLeft >= maximum() - 2))) return;
-        event.preventDefault();
-        event.stopPropagation();
-        // Todos os eventos de impulso/inércia pertencem ao mesmo gesto.
-        // Não inicia outra transição enquanto a atual estiver em andamento.
-        if (!sameGesture && !suiteSliding) slideSuiteTo(index + direction);
-        return;
-      }
+      if (event.ctrlKey || (homeSuites && maximum() <= 2)) return;
       if (Math.abs(event.deltaX) >= Math.abs(event.deltaY)) return;
       if (smoothCollection) {
         const now = performance.now();
@@ -224,10 +149,7 @@
     let suppressClick = false;
     track.addEventListener('pointerdown', event => {
       suppressClick = false;
-      if (suiteCarousel && suiteSliding) {
-        track.scrollTo({ left: track.scrollLeft, behavior: 'instant' });
-        releaseSuite();
-      }
+
       if (event.pointerType !== 'mouse' || event.button !== 0 ||
           event.target.closest('a, button, input, select, textarea, label') ||
           event.target.closest('.carousel-track') !== track) return;
@@ -263,6 +185,7 @@
       suppressClick = false;
     }, true);
 
+    }
     if ('ResizeObserver' in window) {
       const observer = new ResizeObserver(update);
       observer.observe(track);

@@ -9,7 +9,6 @@
   .resort-picture img { max-width: 100%; }
   .site-header .brand { min-width: 0; }
   .site-header .brand-name > span:last-child { min-width: 0; }
-  .account-panel { max-width: calc(100vw - 2 * var(--gutter)); }
   .carousel-bar { align-items: center; flex-wrap: wrap; }
   .carousel-controls { flex-shrink: 0; }
   .carousel-track { overscroll-behavior-x: contain; touch-action: pan-x pan-y pinch-zoom; }
@@ -17,11 +16,7 @@
   .main-home .home-experiences .section-heading { min-width: 0; }
   .main-home .section-heading h2 { max-width: 100%; }
   .main-checkout > section[aria-labelledby='summary'] { position: static; }
-  .main-my-reservations section[aria-labelledby='record'] button,
-  .main-administration section button { white-space: normal; }
   .table-scroll { width: 100%; max-width: 100%; overscroll-behavior-x: contain; }
-  .main-administration table { min-width: 560px; }
-  .main-administration table th, .main-administration table td { padding: .85rem; }
   .credit-entry > div { overflow-wrap: anywhere; }
 }
 @media (max-width: 800px) {
@@ -31,7 +26,6 @@
   .site-header #primary-navigation ul { align-items: stretch; }
   .site-header #primary-navigation a { min-height: 48px; line-height: 1.5; padding-block: .7rem; }
   .site-header #primary-navigation li { min-width: 0; }
-  .account-panel { max-height: calc(100svh - 110px); overflow-y: auto; }
   main :is(input:not([type='checkbox']), select, textarea),
   .date-parts select { font-size: 16px; }
   .main-home .home-hero .hero-copy { width: 100%; max-width: 540px; }
@@ -46,7 +40,6 @@
   .main-home .hospitality-panel { display: block; }
   .main-home .hospitality-panel h2 { max-width: 20ch; }
   .main-checkout .journey-steps { column-gap: 1rem; }
-  .main-my-reservations .page-intro h1 { max-width: 100%; }
   .footer-minimal nav a { min-height: 44px; }
 }
 @media (max-width: 700px) {
@@ -61,10 +54,6 @@
   .main-suites .suite-panel-reserve .text-cta { padding: 1rem; align-items: center; }
   .main-experiences .experience-card .card-copy { padding: 1.4rem; }
   .main-experiences .category-heading h2 { font-size: clamp(2rem, 7vw, 2.7rem); }
-  .main-administration section[aria-labelledby='overview'] dl { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-  .main-administration section[aria-labelledby='overview'] dt,
-  .main-administration section[aria-labelledby='overview'] dd { grid-row: auto; }
-  .main-administration > .page-intro h1 { font-size: clamp(1.9rem, 6.5vw, 3rem); }
 }
 @media (max-width: 600px) {
   .date-parts { grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); gap: .75rem; }
@@ -108,10 +97,8 @@
   .main-contact.contact-editorial > .page-intro h1,
   .main-reservations .page-intro h1 { font-size: 3rem; }
   .main-suites .page-intro h1 { font-size: 3.2rem; }
-  .main-my-reservations .page-intro h1,
   .main-checkout .page-intro h1 { font-size: 2.6rem; }
   .main-checkout #selected-stay { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); }
-  .main-my-reservations section[aria-labelledby='record'] article { padding: 1.1rem; }
 }
 /* Escala de desktop amplo. As regras de tablet e celular permanecem anteriores. */
 @media (min-width: 1280px) {
@@ -123,10 +110,6 @@
   .site-header {
     grid-template-columns: minmax(290px, 350px) minmax(0, 1fr) auto;
   }
-
-  .account-menu { min-width: 3rem; }
-  .account-toggle { width: 3rem; min-height: 3rem; }
-  .account-toggle svg { width: 1.5rem; height: 1.5rem; }
 
   .site-footer {
     padding-inline: max(var(--gutter), calc((100% - var(--site-width)) / 2 + var(--gutter)));
@@ -155,8 +138,6 @@
   }
   .main-contact.contact-editorial address { font-size: .96rem; }
   .main-checkout #selected-stay { font-size: .94rem; }
-  .main-my-reservations section[aria-labelledby='record'] dl { font-size: .94rem; }
-  .main-administration table { font-size: .88rem; }
 
   .credits-intro { max-width: 960px; }
   .credit-entry p { font-size: .92rem; }

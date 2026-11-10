@@ -1,0 +1,44 @@
+.suite-book {max-width:none;width:100%;margin:0;padding:0;background:#faf4eb}
+.catalog-hero,.catalog-list,.catalog-comfort {padding:clamp(2rem,4vw,5rem) 5.6vw}
+.catalog-hero {color:white;background:linear-gradient(90deg,#182321bb,transparent),url("../images/hero-1920.webp") center 55%/cover;padding-top:8rem}
+.catalog-hero h1 {font-size:clamp(3rem,5vw,6rem);margin:.5rem 0}
+.catalog-hero em {font:italic clamp(1.4rem,2.4vw,2.2rem) var(--serif)}
+.catalog-hero .eyebrow,.catalog-comfort .eyebrow {color:#edd49b}
+.suite-book h2 {font-size:clamp(2rem,3vw,3.5rem);margin:.5rem 0 1.4rem}
+.catalog-carousel #suite-collection-track {display:grid;grid-auto-flow:row;grid-template-columns:minmax(0,1fr);gap:1rem;padding:0;overflow:visible}
+.catalog-carousel .carousel-bar {display:none}
+.catalog-room {display:grid;grid-template-columns:42% minmax(0,1fr) minmax(10rem,19%);align-items:center;border:1px solid #dfd2bf;border-radius:.8rem;background:#faf3e9;overflow:hidden;box-shadow:0 2px 8px #40301c12}
+.room-photo {position:relative;align-self:stretch;min-height:12rem}
+.room-photo picture,.room-photo img {position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.room-copy,.room-rate {padding:1.2rem}
+.room-copy h3 {font-size:clamp(1.5rem,2vw,2.5rem);margin:0}
+.room-specs,.room-rate details {font-size:.85rem}
+.room-rate {display:grid;gap:.35rem;border-left:1px solid #d5c5ac}
+.room-rate strong {font:1.55rem var(--serif)}
+.book-link {display:inline-block;background:#303c2a;color:white;text-decoration:none;padding:.7rem 1rem;border-radius:.45rem}
+.room-rate summary {cursor:pointer;padding:.6rem 0}
+.catalog-comfort {background:#2c382b;color:white;text-align:center}
+.catalog-comfort ul {display:grid;grid-template-columns:repeat(5,1fr);padding:0;list-style:none}
+.catalog-comfort li {padding:.6rem 1rem;border-inline-start:1px solid #818570}
+.catalog-comfort li:first-child {border:0}
+.catalog-plan {padding:3rem 6vw 3rem 43%;background:url("../images/home-bougainvillea.jpg") left center/36% 100% no-repeat}
+@media(min-width:801px){
+.page-suites .site-header {position:absolute;inset:0 0 auto;z-index:5;background:transparent;color:white;border:0}
+.page-suites .site-header :is(a,.brand p) {color:white}
+}
+@media(max-width:800px){
+.catalog-hero {padding-top:3rem}
+.catalog-carousel #suite-collection-track {grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:100%;overflow-x:auto}
+.catalog-carousel .carousel-bar {display:flex}
+.catalog-room {display:flex;flex-direction:column;align-items:stretch;scroll-snap-align:start}
+.room-photo {min-height:0;aspect-ratio:2/1}
+.room-rate {border:0;padding-top:0}
+.catalog-comfort ul {grid-template-columns:repeat(auto-fit,minmax(9rem,1fr))}
+.catalog-plan {padding:2rem 6vw;background-image:none}
+}
+.suite-compare {margin:0 0 1.5rem}
+.suite-compare summary {width:fit-content;margin-left:auto;border:1px solid currentColor;padding:.5rem 1rem;border-radius:.45rem;cursor:pointer}
+@media(min-width:801px){
+.suite-compare {margin-top:-3.8rem}
+.catalog-carousel #suite-collection-track {touch-action:auto}
+}

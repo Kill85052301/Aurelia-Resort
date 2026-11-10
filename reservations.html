@@ -20,6 +20,10 @@
   <script src="assets/vendor/gsap/gsap.min.js" defer></script>
   <script src="assets/vendor/gsap/ScrollTrigger.min.js" defer></script>
   <script src="assets/js/motion.js" defer></script>
+  <link rel="stylesheet" href="assets/css/reservas.css">
+  <link rel="stylesheet" href="assets/css/headers.css">
+  <link rel="stylesheet" href="assets/css/credits.css">
+  <script src="assets/js/credits.js" defer></script>
 </head>
 <body class="page-reservations">
   <a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
@@ -31,12 +35,17 @@
         <li><a href="reservations.html" aria-current="page">Reservas</a></li>
         <li><a href="contact.html">Contato</a></li>
       </ul>
-    </nav><details class="account-menu"><summary class="account-toggle" aria-label="Opções da conta" aria-controls="account-links"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 21v-2a7.5 7.5 0 0 1 15 0v2"/></svg></summary><div class="account-panel" id="account-links"><p>Sua conta</p><ul><li><a href="my-reservations.html">Minhas reservas</a></li><li><a href="administration.html">Administração</a></li></ul></div></details></header>
-  <main id="main-content" class="main-reservations"><header class="page-intro"><p class="eyebrow">Seu próximo capítulo</p>
-
-<h1>Reservas</h1><p>Escolha a suíte, as datas e quem acompanha você.</p>
-<p id="reservation-notice"><strong>Simulação de estadia.</strong> Sem disponibilidade real, confirmação de reserva ou cobrança.</p>
-<span class="intro-monogram" aria-hidden="true">A</span></header><section aria-labelledby="stay-preferences"><picture class="resort-picture stay-preview"><img src="assets/images/pool-suite-1280.webp" srcset="assets/images/pool-suite-640.webp 640w, assets/images/pool-suite-1280.webp 1280w" sizes="(max-width: 540px) 90vw, (max-width: 1000px) 70vw, 720px" width="1280" height="853" alt="Acomodação de luxo com piscina privativa, terraço e área de estar ao ar livre" loading="lazy" decoding="async"></picture><h2 id="stay-preferences">Sua estadia</h2><form id="reservation-form" action="reservations.html" method="get" aria-describedby="reservation-notice reservation-error"><p id="reservation-error" class="form-message" role="alert" tabindex="-1" hidden></p><noscript><p class="form-message">Ative o JavaScript para selecionar sua estadia e acessar a revisão demonstrativa.</p></noscript><fieldset disabled><legend>Preferências da estadia</legend>
+    </nav></header>
+  <main id="main-content" class="booking-page">
+  <header class="page-intro booking-hero">
+    <p class="eyebrow hero-label">Reservas <span class="hero-label-symbol" aria-hidden="true">✦</span></p>
+    <h1>Garanta a sua estadia no Aurelia</h1>
+    <p>Escolha a suíte, as datas e viva o melhor do Mediterrâneo.</p>
+  </header>
+  <div class="booking-layout">
+    <section class="booking-card" aria-labelledby="stay-preferences">
+      <h2 id="stay-preferences">Sua reserva</h2>
+      <p id="reservation-notice"><strong>Simulação fictícia.</strong> Planeje sua estadia sem disponibilidade real, confirmação ou cobrança.</p><form id="reservation-form" action="reservations.html" method="get" aria-describedby="reservation-notice reservation-error"><p id="reservation-error" class="form-message" role="alert" tabindex="-1" hidden></p><noscript><p class="form-message">Ative o JavaScript para selecionar sua estadia e acessar a revisão demonstrativa.</p></noscript><fieldset disabled><legend>Preferências da estadia</legend>
 <div class="date-field" id="arrival-group" role="group" aria-labelledby="arrival-label" aria-describedby="arrival-help">
   <span class="field-label" id="arrival-label">Data de entrada</span>
   <input type="hidden" id="arrival" name="arrival">
@@ -60,10 +69,28 @@
 <p><label for="adults">Adultos</label><br><select id="adults" name="adults" required><option>1</option><option selected>2</option><option>3</option><option>4</option></select></p>
 <p><label for="children">Crianças</label><br><select id="children" name="children" required><option selected>0</option><option>1</option><option>2</option><option>3</option></select></p>
 <p><label for="suite">Suíte desejada</label><br><select id="suite" name="suite" required aria-describedby="suite-capacity"><option value="">Selecione uma suíte</option><option value="ocean-terrace">Suíte Terraço do Mar</option><option value="private-pool">Suíte Piscina Privativa</option><option value="signature-residence">Residência Exclusiva Aurelia</option></select></p>
-<p id="suite-capacity" class="capacity-note">Selecione uma suíte para consultar a ocupação máxima.</p><button type="submit" id="continue-stay" disabled>Continuar para a revisão da estadia <span aria-hidden="true">→</span></button></fieldset></form></section>
-<section aria-labelledby="before"><h2 id="before">Antes de reservar</h2><p>Ocupação conforme a suíte. Acessibilidade, camas extras e pedidos especiais dependerão de confirmação.</p><p><a href="suites.html">Compare suítes e tarifas ilustrativas</a></p></section>
-<section aria-labelledby="next"><h2 id="next">O próximo passo</h2><p>Confira sua seleção na próxima etapa. Valores ilustrativos, sem cobrança.</p><p><a href="#stay-preferences">Preencher minha estadia</a> · <a href="my-reservations.html">Ver Minhas reservas</a></p></section>
-  </main>
-  <footer class="site-footer footer-minimal"><a class="footer-brand" href="index.html">AURELIA RESORT</a><nav aria-label="Navegação do rodapé"><ul><li><a href="reservations.html">Reservas</a></li><li><a href="contact.html">Contato</a></li></ul></nav><small class="footer-copyright">&copy; 2026 AURELIA RESORT · Conceito fictício.</small></footer>
-</body>
+<p id="suite-capacity" class="capacity-note">Selecione uma suíte para consultar a ocupação máxima.</p><button type="submit" id="continue-stay" disabled>Continuar para a revisão da estadia <span aria-hidden="true">→</span></button></fieldset></form>    </section>
+    <aside class="booking-photo">
+      <h2>Suítes exclusivas</h2>
+      <p>Terraços privativos e espaços para descansar diante do Mediterrâneo.</p>
+      <a href="suites.html">Compare suítes e tarifas ilustrativas →</a>
+    </aside>
+  </div>
+  <section class="booking-info" aria-label="Informações sobre a estadia">
+    <div><h2 id="before">Antes de reservar</h2><p>A ocupação varia conforme a suíte. Camas extras e acessibilidade dependem de confirmação.</p></div>
+    <div><h2 id="next">Revisão da estadia</h2><p>Confira datas, hóspedes e valores ilustrativos antes de concluir a simulação.</p><a href="#stay-preferences">Preencher minha estadia</a></div>
+    <div><h2>Atendimento dedicado</h2><p>Consulte as informações para pedidos especiais.</p><a href="contact.html">Contato</a></div>
+  </section></main>
+  <footer class="site-footer footer-minimal"><a class="footer-brand" href="index.html">AURELIA RESORT</a><nav aria-label="Navegação do rodapé"><ul><li><a href="reservations.html">Reservas</a></li><li><a href="contact.html">Contato</a></li><li><a href="#photography-credits" data-credits-link aria-haspopup="dialog" aria-controls="photography-credits">Créditos fotográficos</a></li></ul></nav><small class="footer-copyright">&copy; 2026 AURELIA RESORT · Conceito fictício.</small></footer>
+<dialog class="credits-dialog" id="photography-credits" aria-labelledby="credits-title"><button type="button" class="credits-close" aria-label="Fechar créditos">×</button><h2 id="credits-title">Créditos fotográficos</h2><section class="credit-license" aria-labelledby="license-title"><h2 id="license-title">Fontes e licença</h2><p>Imagens obtidas no Unsplash, conforme a <a href="https://unsplash.com/license">licença Unsplash</a>. Cada fotografia mantém abaixo um link para sua página original e autoria.</p><p>As imagens são ilustrativas e retratam locais reais, sem associação ou endosso ao resort fictício AURELIA. Arquivos locais em WebP foram redimensionados para a apresentação no site.</p></section><div class="credits-grid"><article class="credit-entry"><div><p class="eyebrow">Fotografia</p><h2>Horizonte mediterrâneo</h2><p>Piscina de borda infinita diante do mar e da arquitetura branca de Santorini.</p><p class="credit-links"><a href="https://unsplash.com/photos/39pUYrUDrEc">Fotografia e autoria no Unsplash ↗</a><a href="https://unsplash.com/license">Licença de uso ↗</a></p></div></article>
+<article class="credit-entry"><div><p class="eyebrow">Fotografia</p><h2>Suíte Terraço do Mar</h2><p>Quarto elegante com cama ampla, tecidos claros e iluminação natural.</p><p class="credit-links"><a href="https://unsplash.com/photos/Xph_EJ-22vE">Fotografia e autoria no Unsplash ↗</a><a href="https://unsplash.com/license">Licença de uso ↗</a></p></div></article>
+<article class="credit-entry"><div><p class="eyebrow">Fotografia</p><h2>Suíte Piscina Privativa</h2><p>Acomodação de luxo com piscina privativa, terraço e área de estar ao ar livre.</p><p class="credit-links"><a href="https://unsplash.com/photos/DcRVVXSs_5w">Fotografia e autoria no Unsplash ↗</a><a href="https://unsplash.com/license">Licença de uso ↗</a></p></div></article>
+<article class="credit-entry"><div><p class="eyebrow">Fotografia</p><h2>Residência Exclusiva Aurelia</h2><p>Sala ampla de inspiração mediterrânea com sofás em tons naturais.</p><p class="credit-links"><a href="https://unsplash.com/photos/mj1VcrVMs4g">Fotografia e autoria no Unsplash ↗</a><a href="https://unsplash.com/license">Licença de uso ↗</a></p></div></article>
+<article class="credit-entry"><div><p class="eyebrow">Fotografia</p><h2>Spa Aurelia</h2><p>Piscina interna de spa com grandes janelas voltadas para a paisagem.</p><p class="credit-links"><a href="https://unsplash.com/photos/uE7vZHFqQNE">Fotografia e autoria no Unsplash ↗</a><a href="https://unsplash.com/license">Licença de uso ↗</a></p></div></article>
+<article class="credit-entry"><div><p class="eyebrow">Fotografia</p><h2>Restaurante do Terraço</h2><p>Mesas ao ar livre em um restaurante diante do mar na Grécia.</p><p class="credit-links"><a href="https://unsplash.com/photos/IJmCk327Qlc">Fotografia e autoria no Unsplash ↗</a><a href="https://unsplash.com/license">Licença de uso ↗</a></p></div></article>
+<article class="credit-entry"><div><p class="eyebrow">Fotografia</p><h2>Passeio de veleiro</h2><p>Veleiros junto ao litoral de Positano, na Itália.</p><p class="credit-links"><a href="https://unsplash.com/photos/n7hDT_OfEP4">Fotografia e autoria no Unsplash ↗</a><a href="https://unsplash.com/license">Licença de uso ↗</a></p></div></article>
+<article class="credit-entry"><div><p class="eyebrow">Fotografia</p><h2>Paisagem do resort</h2><p>Piscina e espreguiçadeiras integradas à arquitetura de um resort.</p><p class="credit-links"><a href="https://unsplash.com/photos/AFd25jow7mw">Fotografia e autoria no Unsplash ↗</a><a href="https://unsplash.com/license">Licença de uso ↗</a></p></div></article>
+<article class="credit-entry"><div><p class="eyebrow">Fotografia</p><h2>Jantar privativo</h2><p>Mesa preparada para um jantar intimista, com vela acesa e detalhes de limão.</p><p class="credit-links"><a href="https://unsplash.com/photos/hOzvua4HySw">Fotografia e autoria no Unsplash ↗</a><a href="https://unsplash.com/license">Licença de uso ↗</a></p></div></article>
+<article class="credit-entry"><div><p class="eyebrow">Fotografia</p><h2>Sabores e tradições locais</h2><p>Prato mediterrâneo de salmão com arroz, vegetais e limão.</p><p class="credit-links"><a href="https://unsplash.com/photos/KxbBzxQ5rhY">Fotografia e autoria no Unsplash ↗</a><a href="https://unsplash.com/license">Licença de uso ↗</a></p></div></article>
+<article class="credit-entry"><div><p class="eyebrow">Fotografia</p><h2>Movimento à beira-mar</h2><p>Prática de yoga e alongamento junto ao mar.</p><p class="credit-links"><a href="https://unsplash.com/photos/dgrAW6Wm2Yo">Fotografia e autoria no Unsplash ↗</a><a href="https://unsplash.com/license">Licença de uso ↗</a></p></div></article></div><p class="credits-return"><a href="index.html">← Voltar ao resort</a></p></dialog></body>
 </html>
