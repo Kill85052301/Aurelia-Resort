@@ -38,8 +38,6 @@
     const count = controls.querySelector('.carousel-count');
     const cards = Array.from(track.children);
     if (!cards.length) return;
-    const homeSuites = track.id === 'home-suites-track';
-    const smoothCollection = carousel.dataset.scrollBehavior === 'smooth';
     const behavior = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
 
     cards.forEach((card, index) => {
@@ -50,18 +48,15 @@
     const maximum = () => Math.max(0, track.scrollWidth - track.clientWidth);
     const positions = () => {
       const left = track.getBoundingClientRect().left;
+      const max = maximum();
       const scrollPadding = parseFloat(window.getComputedStyle(track).scrollPaddingLeft) || 0;
-      return cards.map(card => Math.min(maximum(), Math.max(0,
+      return cards.map(card => Math.min(max, Math.max(0,
         card.getBoundingClientRect().left - left - track.clientLeft + track.scrollLeft - scrollPadding)));
     };
     const update = () => {
       const max = maximum();
       const current = Math.max(0, track.scrollLeft);
       controls.hidden = max <= 2;
-      if (homeSuites) {
-        carousel.classList.toggle('carousel-fits', max <= 2);
-        track.tabIndex = max <= 2 ? -1 : 0;
-      }
       const offsets = positions();
       previous.disabled = current <= offsets[0] + 2;
       next.disabled = current >= offsets[offsets.length - 1] - 2;
@@ -72,8 +67,6 @@
       if (count.textContent !== label) count.textContent = label;
     };
     const go = direction => {
-      if (homeSuites && maximum() <= 2) return;
-
       const offsets = positions();
       const current = track.scrollLeft;
       let destination;
@@ -89,7 +82,7 @@
     previous.addEventListener('click', () => go(-1));
     next.addEventListener('click', () => go(1));
     track.addEventListener('keydown', event => {
-      if (event.target !== track || (homeSuites && maximum() <= 2)) return;
+      if (event.target !== track) return;
       if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
         event.preventDefault();
         go(event.key === 'ArrowRight' ? 1 : -1);
@@ -100,90 +93,72 @@
         update();
       }
     });
-    track.addEventListener('scroll', update, { passive: true });
+    let updateFrame = 0;
+    track.addEventListener('scroll', () => {
+      if (updateFrame) return;
+      updateFrame = requestAnimationFrame(() => {
+        updateFrame = 0;
+        update();
+      });
+    }, { passive: true });
     // Trackpads e rodas horizontais mantêm o comportamento nativo. A roda
     // vertical também explora a coleção, liberando a página ao chegar às bordas.
     if (!carousel.hasAttribute('data-native-scroll')) {
-    let wheelTarget = null;
-    let lastWheel = 0;
-    let lastWheelDirection = 0;
-    track.addEventListener('wheel', event => {
-      if (event.ctrlKey || (homeSuites && maximum() <= 2)) return;
-      if (Math.abs(event.deltaX) >= Math.abs(event.deltaY)) return;
-      if (smoothCollection) {
-        const now = performance.now();
-        const direction = Math.sign(event.deltaY);
-        if (lastWheel > 0 && now - lastWheel < 240 && direction === lastWheelDirection) {
-          lastWheel = now;
+      track.addEventListener('wheel', event => {
+        if (event.ctrlKey) return;
+        if (Math.abs(event.deltaX) >= Math.abs(event.deltaY)) return;
+        const scale = event.deltaMode === 1 ? 20 : event.deltaMode === 2 ? track.clientWidth : 1;
+        const delta = event.deltaY * scale;
+        const before = track.scrollLeft;
+        const destination = Math.max(0, Math.min(maximum(), before + delta));
+        if (Math.abs(destination - before) < 1) return;
+        event.preventDefault();
+        event.stopPropagation();
+        track.scrollLeft = destination;
+        update();
+      }, { passive: false });
+
+      // Touch and pen use the browser's native swipe behavior. Mouse users can
+      // drag card backgrounds; links, buttons, and text inputs retain their actions.
+      let drag = null;
+      let suppressClick = false;
+      track.addEventListener('pointerdown', event => {
+        suppressClick = false;
+
+        if (event.pointerType !== 'mouse' || event.button !== 0 ||
+            event.target.closest('a, button, input, select, textarea, label') ||
+            event.target.closest('.carousel-track') !== track) return;
+        drag = { id: event.pointerId, startX: event.clientX, startLeft: track.scrollLeft, moved: false };
+        suppressClick = false;
+        track.setPointerCapture(event.pointerId);
+        event.preventDefault();
+      });
+      track.addEventListener('pointermove', event => {
+        if (!drag || event.pointerId !== drag.id) return;
+        const delta = event.clientX - drag.startX;
+        if (!drag.moved && Math.abs(delta) < 6) return;
+        drag.moved = true;
+        track.classList.add('is-dragging');
+        track.scrollLeft = drag.startLeft - delta;
+      });
+      const stopDrag = event => {
+        if (!drag || event.pointerId !== drag.id) return;
+        suppressClick = drag.moved;
+        drag = null;
+        track.classList.remove('is-dragging');
+        if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
+        update();
+      };
+      track.addEventListener('pointerup', stopDrag);
+      track.addEventListener('pointercancel', stopDrag);
+      track.addEventListener('lostpointercapture', stopDrag);
+      track.addEventListener('click', event => {
+        if (suppressClick && event.detail > 0) {
           event.preventDefault();
-          return;
+          event.stopPropagation();
         }
-        const atEdge = direction > 0 ? track.scrollLeft >= maximum() - 2 : track.scrollLeft <= 2;
-        if (atEdge) return;
-        event.preventDefault();
-        event.stopPropagation();
-        lastWheel = now;
-        lastWheelDirection = direction;
-        go(direction);
-        return;
-      }
-      const scale = event.deltaMode === 1 ? 20 : event.deltaMode === 2 ? track.clientWidth : 1;
-      const delta = event.deltaY * scale;
-      const before = smoothCollection && wheelTarget !== null && performance.now() - lastWheel < 180
-        ? wheelTarget : track.scrollLeft;
-      const destination = Math.max(0, Math.min(maximum(), before + delta));
-      if (Math.abs(destination - before) < 1) return;
-      event.preventDefault();
-      event.stopPropagation();
-      if (smoothCollection) {
-        wheelTarget = destination;
-        lastWheel = performance.now();
-        track.scrollTo({ left: destination, behavior: behavior() });
-      } else track.scrollLeft = destination;
-      update();
-    }, { passive: false });
-
-    // Touch and pen use the browser's native swipe behavior. Mouse users can
-    // drag card backgrounds; links, buttons, and text inputs retain their actions.
-    let drag = null;
-    let suppressClick = false;
-    track.addEventListener('pointerdown', event => {
-      suppressClick = false;
-
-      if (event.pointerType !== 'mouse' || event.button !== 0 ||
-          event.target.closest('a, button, input, select, textarea, label') ||
-          event.target.closest('.carousel-track') !== track) return;
-      drag = { id: event.pointerId, startX: event.clientX, startLeft: track.scrollLeft, moved: false };
-      suppressClick = false;
-      track.setPointerCapture(event.pointerId);
-      event.preventDefault();
-    });
-    track.addEventListener('pointermove', event => {
-      if (!drag || event.pointerId !== drag.id) return;
-      const delta = event.clientX - drag.startX;
-      if (!drag.moved && Math.abs(delta) < 6) return;
-      drag.moved = true;
-      track.classList.add('is-dragging');
-      track.scrollLeft = drag.startLeft - delta;
-    });
-    const stopDrag = event => {
-      if (!drag || event.pointerId !== drag.id) return;
-      suppressClick = drag.moved;
-      drag = null;
-      track.classList.remove('is-dragging');
-      if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
-      update();
-    };
-    track.addEventListener('pointerup', stopDrag);
-    track.addEventListener('pointercancel', stopDrag);
-    track.addEventListener('lostpointercapture', stopDrag);
-    track.addEventListener('click', event => {
-      if (suppressClick && event.detail > 0) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-      suppressClick = false;
-    }, true);
+        suppressClick = false;
+      }, true);
 
     }
     if ('ResizeObserver' in window) {

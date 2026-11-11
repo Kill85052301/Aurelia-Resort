@@ -91,3 +91,66 @@ body main .hero-label .hero-label-symbol {
   margin-left:.4rem;
   color:#edd49b;
 }
+
+
+.credits-dialog {
+  position:fixed;inset:0;width:min(36rem,calc(100% - 2rem));max-width:none;
+  max-height:calc(100dvh - 2rem);box-sizing:border-box;margin:auto;
+  padding:clamp(1.5rem,4vw,2.5rem);border:1px solid #d7c7ad;border-radius:.8rem;
+  background:#faf4eb;color:#263126;box-shadow:0 1rem 4rem #111c2250;overflow:auto;
+}
+.credits-dialog::backdrop {background:#18231dcc}
+.credits-dialog h2 {font:1.6rem/1.25 var(--serif);margin:0 2rem 1rem 0}
+.credits-dialog .credit-entry h2 {font-size:1.15rem;margin:.5rem 0}
+.credits-dialog p {font-size:.9rem;line-height:1.6;overflow-wrap:anywhere}
+.credits-dialog .credit-entry {margin:0;padding:1rem 0;border-top:1px solid #d7c7ad}
+.credits-dialog .credit-links a {display:inline-block;margin:0 1rem .4rem 0}
+.credits-dialog .credits-close {
+  position:absolute;top:.6rem;right:.6rem;box-sizing:border-box;
+  width:2.75rem;height:2.75rem;min-height:0;padding:0;border:1px solid #d7c7ad;
+  border-radius:50%;background:transparent;color:inherit;font-size:0;line-height:1;
+}
+.credits-close::before,.credits-close::after {
+  content:"";position:absolute;top:50%;left:50%;width:1rem;height:1px;
+  background:currentColor;transform:translate(-50%,-50%) rotate(45deg);
+}
+.credits-close::after {transform:translate(-50%,-50%) rotate(-45deg)}
+.credits-dialog .credits-close:focus-visible {outline:none;border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
+body:has(.credits-dialog[open]) {overflow:hidden}
+
+body { --flower-image:url("../images/bougainvillea-1280.jpg"); }
+@media(max-width:800px) {
+  body { --flower-image:image-set(url("../images/bougainvillea-640.jpg") 1x,url("../images/bougainvillea-1280.jpg") 2x); }
+}
+
+/* Cobertura contínua e transição suave das fotografias florais. */
+.page-home .editorial-stay::before {
+  background-size:cover;
+  background-repeat:no-repeat;
+  -webkit-mask-image:linear-gradient(to right,#000 70%,transparent);
+  mask-image:linear-gradient(to right,#000 70%,transparent);
+  pointer-events:none;
+}
+
+
+@media(max-width:540px) {
+  .page-home .editorial-stay::before {
+    -webkit-mask-image:linear-gradient(to bottom,#000 65%,transparent);
+    mask-image:linear-gradient(to bottom,#000 65%,transparent);
+  }
+}
+
+
+
+/* Indicador único da página ativa e fundo contínuo no rodapé. */
+body .site-header nav a[aria-current] {
+  text-decoration-line:none;
+  border-bottom-color:transparent;
+  box-shadow:0 1px 0 var(--gold);
+}
+body .site-footer.footer-minimal,
+body .site-footer.footer-minimal > *,
+body :is(.contact-band,.review-benefits,.booking-info,.catalog-comfort,.escape-benefits) {
+  background-color:#213528;
+  background-image:none;
+}

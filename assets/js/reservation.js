@@ -121,7 +121,10 @@
     if (bookingPhoto) {
       const image = suiteImages[fields.suite.value] || 'ocean-suite';
       const imageUrl = new URL('assets/images/' + image + '-1280.webp', document.baseURI);
-      bookingPhoto.style.setProperty('--booking-image', 'url("' + imageUrl.href + '")');
+      const background = 'url("' + imageUrl.href + '")';
+      if (bookingPhoto.style.getPropertyValue('--booking-image') !== background) {
+        bookingPhoto.style.setProperty('--booking-image', background);
+      }
     }
     const suite = stay.suites[fields.suite.value];
     capacity.textContent = suite
@@ -247,6 +250,8 @@
     if (document.visibilityState === 'visible') resumeDateLimits();
   });
   // Também acompanha alterações de relógio/fuso enquanto a página está visível.
-  setInterval(resumeDateLimits, 60000);
+  setInterval(() => {
+    if (document.visibilityState === 'visible') resumeDateLimits();
+  }, 60000);
   resumeDateLimits();
 })();

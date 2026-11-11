@@ -84,7 +84,7 @@
 .page-home .home-experiences .carousel-track { grid-auto-columns:32%; gap:2%; padding:.2rem .2rem .6rem; }
 .page-home .home-experiences .card-illustration { height:auto; aspect-ratio:1.3; }
 .page-home .main-home .editorial-stay { display:block; align-self:stretch; margin:0; padding:clamp(2rem,3.5vw,4rem) var(--home-edge) clamp(2rem,3.5vw,4rem) 42%; background:#f7efe5; box-shadow:none; }
-.page-home .editorial-stay::before { content:""; position:absolute; inset:0 64% 0 0; background:url("../images/home-bougainvillea.jpg") center / cover; }
+.page-home .editorial-stay::before { content:""; position:absolute; inset:0 64% 0 0; background:var(--flower-image) center / cover; }
 .page-home .editorial-stay h2 { max-width:none; font-size:clamp(2rem,3vw,3.3rem); margin:.6rem 0; }
 .page-home .editorial-stay p { max-width:60ch; margin-bottom:.6rem; }
 .page-home .footer-minimal { margin:0; width:100%; max-width:none; background:#303929; padding:1.25rem var(--home-edge); }
@@ -105,13 +105,6 @@
  .page-home .main-home .editorial-stay { padding:calc(35vw + 1.5rem) var(--home-edge) 1.5rem; }
  .page-home .editorial-stay::before { inset:0 0 auto; height:35vw; }
 }
-
-.page-home .home-collection .carousel-fits .carousel-bar { display:none; }
-.page-home .home-collection .carousel-fits .carousel-track {
-  scrollbar-width:none;
-  cursor:auto;
-}
-.page-home .home-collection .carousel-fits .carousel-track::-webkit-scrollbar { display:none; }
 
 /* A coleção inicial apresenta todas as suítes em uma grade. */
 .page-home .home-collection .suite-grid { margin-top:1.5rem; }

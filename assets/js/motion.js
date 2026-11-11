@@ -21,10 +21,15 @@
    context.add(key, fn);
    return (...args) => context[key](...args);
   };
+  const revealed = new Set();
   const reveal = (element, targets) => {
+   const fresh = Array.from(targets).filter(target => !revealed.has(target));
+   if (!fresh.length) return;
+   fresh.forEach(target => revealed.add(target));
+   gsap.set(fresh, { y: 16, opacity: 0 });
    ScrollTrigger.create({ trigger: element, start: 'top 94%', once: true,
     onEnter: safe(() => timeline({ defaults: { duration: .65, ease: 'power3.out' } })
-     .from(targets, { y: 16, opacity: 0, stagger: .055, clearProps: 'transform,opacity' })) });
+     .to(fresh, { y: 0, opacity: 1, stagger: .055, clearProps: 'transform,opacity' })) });
   };
   const hero = document.querySelector('.home-hero');
   if (hero) {
@@ -35,31 +40,42 @@
    if (title) tl.from(title, { clipPath: 'inset(0 0 100% 0)', y: 20, duration: .95, clearProps: 'clipPath,transform' }, .08);
    tl.from(hero.querySelectorAll('.hero-copy > p, .edition-index, .hero-footnote, .hero-index'),
     { y: 12, opacity: 0, duration: .7, stagger: .065, clearProps: 'transform,opacity' }, .12);
-   document.querySelectorAll('.main-home > section:not(.home-hero)').forEach(section => {
-    reveal(section, section.querySelectorAll('.eyebrow, h2, .section-heading > a, .editorial-stay > p:not(.eyebrow), .editorial-moments > p:not(.eyebrow)'));
-   });
   }
-  const intro = document.querySelector('.page-intro, .credits-intro');
+  const intro = document.querySelector('.page-intro, .credits-intro, .catalog-hero');
   if (intro) timeline().from(intro, { y: 12, opacity: 0, duration: .65, ease: 'power3.out', clearProps: 'transform,opacity' });
 
   document.querySelectorAll('.experience-card').forEach(card => {
+   const photo = card.querySelector('.experience-photo');
+   const copy = card.querySelectorAll('h3, .card-copy p, .experience-more');
+   gsap.set(photo, { clipPath: 'inset(0 0 100% 0)' });
+   gsap.set(copy, { y: 14, opacity: 0 });
    ScrollTrigger.create({ trigger: card, start: 'top 94%', once: true, onEnter: safe(() => {
     timeline({ defaults: { ease: 'power3.out' } })
-     .from(card.querySelector('.experience-photo'), { clipPath: 'inset(0 0 100% 0)', duration: .85, clearProps: 'clipPath' }, 0)
-     .from(card.querySelectorAll('h3, .card-copy p'), { y: 14, opacity: 0, duration: .6, stagger: .08, clearProps: 'transform,opacity' }, .1);
+     .to(photo, { clipPath: 'inset(0 0 0% 0)', duration: .85, clearProps: 'clipPath' }, 0)
+     .to(copy, { y: 0, opacity: 1, duration: .6, stagger: .08, clearProps: 'transform,opacity' }, .1);
    }) });
    const image = card.querySelector('img');
    if (image && ScrollTrigger.isTouch === 0) gsap.fromTo(image, { scale: 1.04, yPercent: -1 },
     { scale: 1.04, yPercent: 1, ease: 'none', scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: .6 } });
   });
 
-  document.querySelectorAll('.main-reservations > section, .contact-postcard > section, .main-checkout > section, .credit-entry').forEach(section => {
-   reveal(section, section);
+  // Cada grupo entra uma vez, evitando efeitos sobrepostos em pais e filhos.
+  const groups = main.querySelectorAll(
+   '.home-benefits > div, .home-collection .section-heading, .home-suite-grid .card-copy, ' +
+   '.editorial-stay, .home-experiences .section-heading, .hospitality-panel, ' +
+   '.catalog-list > .eyebrow, .catalog-list > h2, .suite-compare, .catalog-room .room-copy, ' +
+   '.catalog-comfort, .escape-nav > div, .escape-collection > header, ' +
+   '.escape-benefits, .booking-card, .booking-info > div, ' +
+   '.contact-view, .contact-layout > section, .contact-band > div, ' +
+   '.main-checkout > section, .review-benefits > div'
+  );
+  groups.forEach(group => {
+   if (group.closest('[data-carousel]')) return;
+   reveal(group, [group]);
   });
-  const contactPhoto = document.querySelector('.contact-postcard > .architectural-art');
-  if (contactPhoto) ScrollTrigger.create({ trigger: contactPhoto, start: 'top 94%', once: true,
-   onEnter: safe(() => gsap.from(contactPhoto, { clipPath: 'inset(0 0 8% 0)', duration: .9, ease: 'power3.out', clearProps: 'clipPath' })) });
-
+  on(window, 'load', () => ScrollTrigger.refresh(), { once: true });
+  const footer = document.querySelector('.site-footer');
+  if (footer) reveal(footer, [footer]);
   document.querySelectorAll('input:not([type="hidden"]), select, textarea').forEach(field => {
    on(field, 'focus', safe(() => {
     if (!field.disabled) gsap.to(field, { boxShadow: '0 0 0 3px rgba(132,104,57,.13)', duration: .18, overwrite: 'auto' });
@@ -104,10 +120,18 @@
   window.addEventListener('pageshow', event => {
    if (event.persisted) { finish(); leaving = false; gsap.set(main, { clearProps: 'opacity' }); ScrollTrigger.refresh(); }
   }, { signal: events.signal });
+  let refreshFrame = 0;
+  const refreshImages = () => {
+   if (refreshFrame) return;
+   refreshFrame = requestAnimationFrame(() => {
+    refreshFrame = 0;
+    ScrollTrigger.refresh();
+   });
+  };
   document.querySelectorAll('img').forEach(img => {
-   if (!img.complete) on(img, 'load', () => ScrollTrigger.refresh(), { once: true });
+   if (!img.complete) on(img, 'load', refreshImages, { once: true });
   });
-  return () => { events.abort(); leaving = false; };
+  return () => { events.abort(); cancelAnimationFrame(refreshFrame); cancelNavigation(); leaving = false; };
  });
  } finally { boot?.reveal(); }
 })();

@@ -21,7 +21,6 @@
 .catalog-comfort ul {display:grid;grid-template-columns:repeat(5,1fr);padding:0;list-style:none}
 .catalog-comfort li {padding:.6rem 1rem;border-inline-start:1px solid #818570}
 .catalog-comfort li:first-child {border:0}
-.catalog-plan {padding:3rem 6vw 3rem 43%;background:url("../images/home-bougainvillea.jpg") left center/36% 100% no-repeat}
 @media(min-width:801px){
 .page-suites .site-header {position:absolute;inset:0 0 auto;z-index:5;background:transparent;color:white;border:0}
 .page-suites .site-header :is(a,.brand p) {color:white}
@@ -34,7 +33,6 @@
 .room-photo {min-height:0;aspect-ratio:2/1}
 .room-rate {border:0;padding-top:0}
 .catalog-comfort ul {grid-template-columns:repeat(auto-fit,minmax(9rem,1fr))}
-.catalog-plan {padding:2rem 6vw;background-image:none}
 }
 .suite-compare {margin:0 0 1.5rem}
 .suite-compare summary {width:fit-content;margin-left:auto;border:1px solid currentColor;padding:.5rem 1rem;border-radius:.45rem;cursor:pointer}

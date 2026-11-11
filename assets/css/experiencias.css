@@ -14,20 +14,18 @@
 .escape-grid .card-copy {padding:1rem 1.25rem}
 .escape-grid h3 {font-size:clamp(1.3rem,1.65vw,2rem);margin:0}
 .escape-grid p {margin:.45rem 0 .8rem;line-height:1.55}
-.escape-grid summary,.escape-plan a:first-of-type {display:inline-block;padding:.65rem 1rem;border-radius:.4rem;background:#253829;color:white;text-decoration:none;cursor:pointer}
+.escape-grid summary{display:inline-block;padding:.65rem 1rem;border-radius:.4rem;background:#253829;color:white;text-decoration:none;cursor:pointer}
 .escape-benefits {background:#233526;color:white;padding:1.6rem 4vw;text-align:center}
 .escape-benefits ul {grid-template-columns:repeat(4,1fr);list-style:none;border:0;margin:0}
 .escape-benefits li {border-inline-start:1px solid #798674;padding:.6rem}
 .escape-benefits li:first-child {border:0}
-.escape-plan {padding:2rem 5vw 2rem 41%;background:url("../images/home-bougainvillea.jpg") left center/34% auto no-repeat}
-.escape-plan a {display:inline-block;margin:.4rem}
 @media(min-width:801px){
 .page-experiences .site-header {position:absolute;inset:0 0 auto;z-index:5;background:transparent;border:0}
 .page-experiences .site-header :is(a,.brand p) {color:white}
 }
 @media(max-width:900px){.escape-grid {grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:800px){.experience-book .escape-hero {padding-top:3rem}.escape-nav {grid-template-columns:repeat(3,1fr)}}
-@media(max-width:580px){.escape-grid {grid-template-columns:1fr}.escape-benefits ul {grid-template-columns:1fr 1fr}.escape-plan {padding:2rem 5vw;background:none}}
+@media(max-width:580px){.escape-grid {grid-template-columns:1fr}.escape-benefits ul {grid-template-columns:1fr 1fr}}
 
 .escape-grid { grid-auto-rows:1fr; }
 .escape-grid .card-copy { display:flex; flex-direction:column; flex:1; }

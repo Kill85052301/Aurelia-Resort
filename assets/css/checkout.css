@@ -36,7 +36,7 @@
 @media(min-width:801px){
  .page-checkout .site-header {position:absolute;inset:0 0 auto;z-index:5;background:transparent;color:white;border:0}
  .page-checkout .site-header :is(a,.brand p) {color:white}
- .page-checkout .site-header [aria-current=location] {border-bottom:1px solid #efd08a}
+ .page-checkout .site-header [aria-current=location] {border-bottom:1px solid transparent}
 }
 @media(max-width:800px){
  .page-checkout .main-checkout {grid-template-columns:var(--edge) minmax(0,1fr) var(--edge)}
@@ -47,4 +47,9 @@
  .review-benefits {grid-template-columns:1fr;gap:.8rem}
  .review-benefits div+div {border:0}
  .main-checkout fieldset {grid-template-columns:minmax(0,1fr)}
+}
+
+@media(max-width:800px) {
+  .main-checkout > section[aria-labelledby=summary],
+  .main-checkout > section[aria-labelledby=guest] {grid-row:auto}
 }
