@@ -117,6 +117,7 @@
     'private-pool': 'pool-suite',
     'signature-residence': 'residence'
   };
+  const rateFormat = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
   const updateCapacity = () => {
     if (bookingPhoto) {
       const image = suiteImages[fields.suite.value] || 'ocean-suite';
@@ -128,7 +129,7 @@
     }
     const suite = stay.suites[fields.suite.value];
     capacity.textContent = suite
-      ? `${suite.name}: até ${suite.capacity} hóspedes no total, incluindo adultos e crianças. Diária ilustrativa a partir de ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(suite.rate)}.`
+      ? `${suite.name}: até ${suite.capacity} hóspedes no total, incluindo adultos e crianças. Diária ilustrativa a partir de ${rateFormat.format(suite.rate)}.`
       : 'Selecione uma suíte para consultar a ocupação máxima.';
   };
   const updateGuestOptions = () => {

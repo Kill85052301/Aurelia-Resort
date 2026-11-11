@@ -33,7 +33,43 @@ body main :is(.catalog-hero,.escape-hero,.booking-hero,.contact-hero,.page-intro
 }
 @media(max-width:800px){
  body .site-header {position:relative;inset:auto;grid-template-columns:minmax(0,1fr) auto;background:var(--olive);color:var(--ivory)}
- body .site-header > #primary-navigation {grid-column:1/-1;grid-row:2}
+ body .site-header > #primary-navigation {
+   position:absolute;
+   inset:calc(100% - .2rem) var(--hero-edge) auto auto;
+   grid-column:auto;
+   grid-row:auto;
+   width:min(18rem,calc(100vw - 2 * var(--hero-edge)));
+   max-height:calc(100dvh - 7rem);
+   overflow-y:auto;
+   overscroll-behavior:contain;
+   margin:0;
+   padding:.65rem 1rem;
+   border:1px solid #bca47680;
+   border-radius:.45rem;
+   background:#213528;
+   box-shadow:0 .6rem 1.7rem #10201730;
+   z-index:21;
+ }
+ body .site-header > .menu-toggle[aria-expanded="false"] + #primary-navigation {display:none}
+ body .site-header > #primary-navigation ul {
+   display:flex;
+   flex-direction:column;
+   align-items:center;
+   justify-content:center;
+   gap:0;
+   padding:0;
+   margin:0;
+ }
+ body .site-header > #primary-navigation li {width:100%;margin:0;padding:0;text-align:center}
+ body .site-header > #primary-navigation a {
+   display:inline-block;
+   width:auto;
+   min-height:44px;
+   line-height:1.5;
+   padding:.6rem .5rem;
+   color:#fff6e6;
+   text-align:center;
+ }
  body .site-header .brand p {margin-left:0}
  body .site-header .menu-toggle {color:var(--ivory);border-color:var(--champagne)}
  body main :is(.catalog-hero,.escape-hero,.booking-hero,.contact-hero),
@@ -140,8 +176,6 @@ body { --flower-image:url("../images/bougainvillea-1280.jpg"); }
   }
 }
 
-
-
 /* Indicador único da página ativa e fundo contínuo no rodapé. */
 body .site-header nav a[aria-current] {
   text-decoration-line:none;
@@ -153,4 +187,19 @@ body .site-footer.footer-minimal > *,
 body :is(.contact-band,.review-benefits,.booking-info,.catalog-comfort,.escape-benefits) {
   background-color:#213528;
   background-image:none;
+}
+
+@media(max-width:540px) {
+  body.page-experiences main > .page-intro.escape-hero h1 {
+    font-size:clamp(1rem,8vw,2.6rem);
+    overflow-wrap:normal;
+    word-break:normal;
+    hyphens:none;
+  }
+}
+@media(max-width:540px) {
+  .page-experiences .escape-hero .hero-title-word {
+    display:inline-block;
+    white-space:nowrap;
+  }
 }

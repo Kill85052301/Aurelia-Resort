@@ -5,17 +5,18 @@
   const menuButton = document.querySelector('.menu-toggle');
   const navigation = document.getElementById('primary-navigation');
   const mobile = window.matchMedia('(max-width: 800px)');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (menuButton && navigation) {
     const setOpen = (open, returnFocus = false) => {
-      navigation.hidden = mobile.matches && !open;
+      navigation.hidden = !open;
       menuButton.setAttribute('aria-expanded', String(open));
       if (returnFocus) menuButton.focus();
     };
     const syncMenu = () => {
       // Avoid leaving focus in a navigation panel that a resize has hidden.
-      const focusInside = navigation.contains(document.activeElement);
+      const returnFocus = mobile.matches && navigation.contains(document.activeElement);
       menuButton.hidden = !mobile.matches;
-      setOpen(!mobile.matches, mobile.matches && focusInside);
+      setOpen(!mobile.matches, returnFocus);
     };
     menuButton.addEventListener('click', () => {
       setOpen(menuButton.getAttribute('aria-expanded') !== 'true');
@@ -38,7 +39,7 @@
     const count = controls.querySelector('.carousel-count');
     const cards = Array.from(track.children);
     if (!cards.length) return;
-    const behavior = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
+    const behavior = () => reducedMotion.matches ? 'instant' : 'smooth';
 
     cards.forEach((card, index) => {
       const heading = card.querySelector('h2, h3');
@@ -56,8 +57,8 @@
     const update = () => {
       const max = maximum();
       const current = Math.max(0, track.scrollLeft);
-      controls.hidden = max <= 2;
       const offsets = positions();
+      controls.hidden = max <= 2;
       previous.disabled = current <= offsets[0] + 2;
       next.disabled = current >= offsets[offsets.length - 1] - 2;
       let index = offsets.reduce((best, position, i) =>

@@ -32,19 +32,15 @@
 .page-home .home-collection .section-heading .eyebrow { margin:0 0 .4rem; }
 .page-home .home-collection .section-heading h2 { max-width:none; font-size:clamp(2rem,2.7vw,3rem); margin:0; }
 .page-home .home-collection .section-heading > a { margin:0; padding:.65rem 1.2rem; border:1px solid var(--gold); border-radius:.5rem; text-decoration:none; }
-.page-home .home-collection .carousel { position:relative; margin-top:1.5rem; }
-.page-home .home-collection .carousel-track { grid-auto-columns:32%; gap:2.5%; }
 .page-home .home-collection .collection-card { border-radius:.9rem; overflow:hidden; }
-.page-home .home-collection .carousel-bar { margin-bottom:.6rem; min-height:0; }
 .page-home .home-collection .card-illustration { height:clamp(200px,18vw,330px); }
 .page-home .main-home > :is(.editorial-stay,.editorial-moments,.home-experiences,.hospitality-panel) { margin:2rem var(--home-edge); }
 @media(max-width:1000px) {
- .page-home .home-collection .carousel-track { grid-auto-columns:47%; }
  .page-home .site-header nav ul { gap:.5rem 1rem; }
 }
 @media(max-width:800px) {
  .page-home .site-header { position:relative; background:var(--olive); grid-template-columns:minmax(0,1fr) auto auto; }
- .page-home .site-header > #primary-navigation { grid-column:1/-1; grid-row:2; }
+
  .page-home .menu-toggle { color:var(--ivory); border-color:var(--champagne); }
  .page-home .brand p { margin-left:0; }
  .page-home .main-home .home-hero { min-height:440px; padding-top:2.2rem; }
@@ -58,7 +54,6 @@
  .page-home { --home-edge:1.15rem; }
  .page-home .hero-copy h1 { font-size:clamp(2.6rem,10vw,3.5rem); }
  .page-home .hero-footnote { margin-top:1.2rem; gap:.7rem; }
- .page-home .home-collection .carousel-track { grid-auto-columns:92%; }
  .page-home .home-collection .section-heading { grid-template-columns:1fr; }
  .page-home .home-collection .section-heading > a { justify-self:start; margin-top:.75rem; }
  .page-home .home-benefits > div { padding:0 .45rem; }

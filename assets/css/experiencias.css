@@ -1,6 +1,5 @@
 .experience-book {width:100%;max-width:none;margin:0;padding:0;background:#faf4eb}
 .experience-book .escape-hero {display:block;margin:0;padding:8rem 5.6vw 3rem;background:linear-gradient(90deg,#182436bf,transparent),url("../images/hero-1920.webp") center 56%/cover;color:white;border:0}
-.escape-hero h1 {font-size:clamp(2.7rem,5vw,5.5rem);line-height:1;margin:.5rem 0}
 .escape-hero p:last-child {font:italic 1.4rem/1.35 var(--serif);max-width:32ch;color:inherit}
 .escape-hero .eyebrow,.escape-benefits .eyebrow {color:#efd39a}
 .escape-nav,.escape-benefits ul {display:grid;grid-template-columns:repeat(6,minmax(0,1fr));padding:1rem 5vw;text-align:center;border-bottom:1px solid var(--line)}
